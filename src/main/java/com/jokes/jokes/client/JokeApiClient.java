@@ -1,6 +1,6 @@
 package com.jokes.jokes.client;
 
-import com.jokes.jokes.model.Joke;
+import com.jokes.jokes.dto.JokeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,10 +22,10 @@ public class JokeApiClient {
         this.restTemplate = new RestTemplate();
     }
 
-    public List<Joke> getRandomJokes(int count) {
+    public List<JokeDTO> getRandomJokes(int count) {
         try (ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
             return IntStream.range(0, count).boxed()
-                    .map(i -> executorService.submit(() -> restTemplate.getForObject(JOKE_URL, Joke.class)))
+                    .map(i -> executorService.submit(() -> restTemplate.getForObject(JOKE_URL, JokeDTO.class)))
                     .map(future -> {
                         try {
                             return future.get(10, TimeUnit.SECONDS);
