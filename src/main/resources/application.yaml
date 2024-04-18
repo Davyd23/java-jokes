@@ -1,3 +1,7 @@
 server:
   error:
     include-message: always
+logging:
+  level:
+    com:
+      jokes: DEBUG

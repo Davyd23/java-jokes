@@ -24,8 +24,6 @@ public class JokeController {
     public List<Joke> getJokes(@RequestParam(defaultValue = "5")
                                @Min(value = 1, message = "Number of jokes should be greater than 0")
                                @Max(value = 100, message = "You can get no more than 100 jokes at a time") Integer count) {
-
-
         return jokeService.getJokes(count);
     }
 }
