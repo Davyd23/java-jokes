@@ -3,3 +3,14 @@ services:
     image: mongo
     ports:
       - '27017:27017'
+  joke-service:
+    image: joke-service
+    build: .
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_DATA_MONGODB_DATABASE: jokes
+      LOGGING_LEVEL_COM_JOKES: INFO
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongodb
