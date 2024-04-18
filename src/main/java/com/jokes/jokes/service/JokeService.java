@@ -4,6 +4,7 @@ import com.jokes.jokes.client.JokeApiClient;
 import com.jokes.jokes.dto.JokeDTO;
 import com.jokes.jokes.model.Joke;
 import com.jokes.jokes.repository.JokeRepository;
+import com.mongodb.MongoBulkWriteException;
 import com.mongodb.MongoTimeoutException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class JokeService {
         }
 
         try {
-            jokeRepository.insert(jokeDTOList.stream().map(this::convertDto).toList());
+            jokeRepository.saveAll(jokeDTOList.stream().map(this::convertDto).toList());
         } catch (MongoTimeoutException ex) {
             log.error("Could not store data into the db", ex);
         }
