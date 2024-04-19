@@ -1,0 +1,12 @@
+server:
+  error:
+    include-message: always
+logging:
+  level:
+    com:
+      jokes: DEBUG
+spring:
+  data:
+    mongodb:
+      host: localhost
+      database: jokes
